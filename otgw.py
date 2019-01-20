@@ -56,7 +56,7 @@ class ThreadedTCPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
 if __name__ == '__main__':
     print("start forwarder")
 
-    HOST, PORT = "localhost", 9002
+    HOST, PORT = "0.0.0.0", 9002
 
     forwardServer = ThreadedTCPServer((HOST, PORT), ThreadedTCPRequestHandler)
     messageProcessor = MessageProcessor()
