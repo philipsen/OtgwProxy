@@ -1,0 +1,13 @@
+[Unit]
+Description=Opentherm Gateway>
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/wim/OtgwProxy/otgw.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+
