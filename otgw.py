@@ -45,6 +45,7 @@ class ThreadedTCPRequestHandler(socketserver.StreamRequestHandler):
                 break
             print("d = {0}".format(data))
             server.server.send(data)
+        clients.remove(self)
 
         #self.request.sendall(response)
 
