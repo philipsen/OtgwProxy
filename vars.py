@@ -26,7 +26,7 @@ def formatBinary(bh, bl):
     return "0x{:0^8b} 0x{:0^8b}".format(int(bh, 16), int(bl, 16))
 
 def formatBinaryBitfield(bh, bl):
-    return [1 if digit=='1' else 0 for digit in "{0:08b}{1:08b}".format(int(bh), int(bl))]
+    return [1 if digit=='1' else 0 for digit in "{0:08b}{1:08b}".format(int(bh, 16), int(bl, 16))]
 
 
 def bitfield(n):
