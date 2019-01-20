@@ -60,23 +60,23 @@ if __name__ == '__main__':
     forwardServer = ThreadedTCPServer((HOST, PORT), ThreadedTCPRequestHandler)
     messageProcessor = MessageProcessor()
 
-    with forwardServer:
-        ip, port = forwardServer.server_address
-        print("listen on {0}:{1}".format(ip, port))
+    #with forwardServer:
+    ip, port = forwardServer.server_address
+    print("listen on {0}:{1}".format(ip, port))
 
-        # Start a thread with the server -- that thread will then start one
-        # more thread for each request
-        server_thread = threading.Thread(target=forwardServer.serve_forever)
-        # Exit the server thread when the main thread terminates
-        server_thread.daemon = True
-        server_thread.start()
-        print("Server loop running in thread:", server_thread.name)
+    # Start a thread with the server -- that thread will then start one
+    # more thread for each request
+    server_thread = threading.Thread(target=forwardServer.serve_forever)
+    # Exit the server thread when the main thread terminates
+    server_thread.daemon = True
+    server_thread.start()
+    print("Server loop running in thread:", server_thread.name)
 
-        server = Forwarder(otgwHost, otgwPort, messageProcessor)
-        try:
-            server.main_loop()
-        except KeyboardInterrupt:
-            print("Ctrl C - Stopping server")
-            forwardServer.shutdown()
-            sys.exit(1)
+    server = Forwarder(otgwHost, otgwPort, messageProcessor)
+    try:
+        server.main_loop()
+    except KeyboardInterrupt:
+        print("Ctrl C - Stopping server")
+        forwardServer.shutdown()
+        sys.exit(1)
 
