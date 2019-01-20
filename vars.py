@@ -91,6 +91,8 @@ data_id = {
     140: ("Flags140", "Flasgs140", formatBinaryBitfield, "Flags140"),
     141: ("Flags141", "Flasgs141", formatBinaryBitfield, "Flags141"),
     150: ("Flags150", "Flasgs150", formatBinaryBitfield, "Flags150"),
+    157: ("Flags155", "Flasgs155", formatBinaryBitfield, "Flags155"),
+    157: ("Flags156", "Flasgs156", formatBinaryBitfield, "Flags156"),
     157: ("Flags157", "Flasgs157", formatBinaryBitfield, "Flags157"),
     170: ("Flags170", "Flasgs170", formatBinaryBitfield, "Flags170"),
     171: ("Flags171", "Flasgs171", formatBinaryBitfield, "Flags171"),
