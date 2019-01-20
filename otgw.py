@@ -8,6 +8,8 @@ from opentherm import *
 
 otgwHost = "192.168.1.189"
 otgwPort = 6883
+#otgwHost = "pi3"
+#otgwPort = 9002
 clients = []
 
 class Forwarder:
@@ -15,14 +17,14 @@ class Forwarder:
     channel = {}
 
     def __init__(self, host, port, messageProcessor):
-        self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        self.server.connect((otgwHost, otgwPort))
-        self.fp = self.server.makefile('r', buffering=1)
+        self.otgwServer = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.otgwServer.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        self.otgwServer.connect((otgwHost, otgwPort))
+        self.fp = self.otgwServer.makefile('r', buffering=1)
         self.messageProcessor = messageProcessor
 
     def main_loop(self):
-        self.input_list.append(self.server)
+        self.input_list.append(self.otgwServer)
         while True:
             ll = self.fp.readline(100000)
             #print("line = {0} ({1} clients)".format(ll, len(clients)))
@@ -44,7 +46,7 @@ class ThreadedTCPRequestHandler(socketserver.StreamRequestHandler):
             if len(data) == 0:
                 break
             print("d = {0}".format(data))
-            server.server.send(data)
+            server.otgwServer.send(data)
         clients.remove(self)
 
         #self.request.sendall(response)
